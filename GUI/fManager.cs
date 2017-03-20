@@ -49,6 +49,12 @@ namespace GUI
             }
         }
 
+        private void fManager_Load(object sender, EventArgs e)
+        {
+            ribbonPageGroupSystem.Text = loginAccount.DisplayName;
+            bsTextDate.Caption = "Chào " + loginAccount.DisplayName;
+        }
+
         private void DisplayAccount(int type)
         {
             ribbonPageManager.Visible = type == 1; // admin
@@ -64,12 +70,6 @@ namespace GUI
             return null;
         }
 
-        private void fManager_Load(object sender, EventArgs e)
-        {
-            ribbonPageGroupSystem.Text = loginAccount.DisplayName;
-            bsTextDate.Caption = "Chào " + loginAccount.DisplayName;
-        }
-
         private void btnShowForm_ItemClick(object sender, ItemClickEventArgs e)
         {
             Form frm = this.CheckFormExist(typeof(fMain));
@@ -83,6 +83,12 @@ namespace GUI
                 f.MdiParent = this;
                 f.Show();
             }
+        }
+
+        private void btnSendMail_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            fSendMail f = new fSendMail();
+            f.ShowDialog();
         }
 
         private void btnAccountInfo_ItemClick(object sender, ItemClickEventArgs e)

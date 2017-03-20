@@ -223,6 +223,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap email_send_icon {
+            get {
+                object obj = ResourceManager.GetObject("email-send-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Folder_URL_History_icon {
             get {
                 object obj = ResourceManager.GetObject("Folder-URL-History-icon", resourceCulture);

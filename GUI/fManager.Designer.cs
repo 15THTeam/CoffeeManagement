@@ -48,8 +48,10 @@
             this.btnBackup = new DevExpress.XtraBars.BarButtonItem();
             this.btnRestore = new DevExpress.XtraBars.BarButtonItem();
             this.btnLog = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSendMail = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroupSystem = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageManager = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -64,6 +66,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // splashScreenManager1
+            // 
+            splashScreenManager1.ClosingDelay = 500;
             // 
             // ribbon
             // 
@@ -86,9 +92,10 @@
             this.ribbonGalleryBarItem1,
             this.btnBackup,
             this.btnRestore,
-            this.btnLog});
+            this.btnLog,
+            this.btnSendMail});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 17;
+            this.ribbon.MaxItemId = 18;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage,
@@ -227,10 +234,20 @@
             this.btnLog.Name = "btnLog";
             this.btnLog.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnLog_ItemClick);
             // 
+            // btnSendMail
+            // 
+            this.btnSendMail.Caption = "Gửi báo cáo";
+            this.btnSendMail.Id = 17;
+            this.btnSendMail.LargeGlyph = global::GUI.Properties.Resources.email_send_icon;
+            this.btnSendMail.LargeWidth = 75;
+            this.btnSendMail.Name = "btnSendMail";
+            this.btnSendMail.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSendMail_ItemClick);
+            // 
             // ribbonPage
             // 
             this.ribbonPage.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1,
+            this.ribbonPageGroup4,
             this.ribbonPageGroupSystem,
             this.ribbonPageGroup2});
             this.ribbonPage.Name = "ribbonPage";
@@ -241,6 +258,12 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.btnShowForm);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Chức năng";
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.ItemLinks.Add(this.btnSendMail);
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "Báo cáo";
             // 
             // ribbonPageGroupSystem
             // 
@@ -300,10 +323,6 @@
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
             // 
-            // splashScreenManager1
-            // 
-            splashScreenManager1.ClosingDelay = 500;
-            // 
             // fManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -361,5 +380,7 @@
 		private System.Windows.Forms.OpenFileDialog openFileDialogRestore;
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private DevExpress.XtraBars.BarButtonItem btnLog;
+        private DevExpress.XtraBars.BarButtonItem btnSendMail;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
 	}
 }

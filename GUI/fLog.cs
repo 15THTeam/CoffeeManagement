@@ -28,8 +28,6 @@ namespace GUI
             DirectoryInfo directory = new DirectoryInfo(path);
             files = directory.GetFiles("*.log");
 
-            // string[] listFilePaths = Directory.GetFiles(path, "*.log", SearchOption.TopDirectoryOnly);
-
             foreach (FileInfo item in files)
                 lsbListFiles.Items.Add(item.Name);
         }

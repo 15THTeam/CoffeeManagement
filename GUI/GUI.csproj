@@ -130,6 +130,12 @@
     <Compile Include="fLogin.Designer.cs">
       <DependentUpon>fLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="fSendMail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fSendMail.Designer.cs">
+      <DependentUpon>fSendMail.cs</DependentUpon>
+    </Compile>
     <Compile Include="fStatistic.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fLogin.resx">
       <DependentUpon>fLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fSendMail.resx">
+      <DependentUpon>fSendMail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="fStatistic.resx">
       <DependentUpon>fStatistic.cs</DependentUpon>
@@ -354,6 +363,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Folder-URL-History-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\email-send-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
