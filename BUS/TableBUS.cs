@@ -65,6 +65,18 @@ namespace BUS
             }
         }
 
+        public void MergeTable(int tableID1, int tableID2)
+        {
+            try
+            {
+                TableDAO.Instance.MergeTable(tableID1, tableID2);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool InsertTable(string name)
         {
             return TableDAO.Instance.InsertTable(name);

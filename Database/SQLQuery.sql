@@ -504,3 +504,25 @@ AS
 	FROM dbo.BillInfo bi, dbo.Bill b, dbo.Food f
 	WHERE b.ID = bi.BillID AND bi.FoodID = f.ID AND b.Status = 0 AND b.TableID = @TableID
 GO
+
+CREATE PROC USP_MergeTable
+@TableID1 INT, @TableID2 INT
+AS
+	BEGIN
+		DECLARE @UnCheckBillID1 INT = -1
+		DECLARE @UnCheckBillID2 INT = -1
+		SELECT @UnCheckBillID1 = ID FROM dbo.Bill WHERE TableID = @TableID1 AND Status = 0
+		SELECT @UnCheckBillID2 = ID FROM dbo.Bill WHERE TableID = @TableID2 AND Status = 0
+
+		IF (@UnCheckBillID1 != -1 AND @UnCheckBillID2 != -1)
+			BEGIN
+				DECLARE @BillInfoID INT
+				SELECT @BillInfoID = ID FROM dbo.BillInfo WHERE BillID = @UnCheckBillID1
+
+				UPDATE dbo.BillInfo SET BillID = @UnCheckBillID2 WHERE ID = @BillInfoID
+				DELETE dbo.Bill WHERE ID = @UnCheckBillID1
+
+				UPDATE dbo.TableCoffee SET STATUS = N'Trống' WHERE ID = @TableID1
+			END
+    END
+GO

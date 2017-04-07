@@ -57,6 +57,18 @@ namespace DAO
             }
         }
 
+        public void MergeTable(int tableID1, int tableID2)
+        {
+            try
+            {
+                DataProvider.Instance.ExecuteNonQuery("USP_MergeTable @TableID1 , @TableID2", new object[] { tableID1, tableID2 });
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public bool InsertTable(string name)
         {
             string query = "USP_InsertTable @Name";

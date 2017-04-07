@@ -115,6 +115,7 @@ namespace GUI
             ShowBill(tableID);
             currentClickButton = sender as SimpleButton;
             btnChangeTable.Enabled = true;
+            btnMergeTable.Enabled = true;
         }
 
         private void lkedPickCategory_EditValueChanged(object sender, EventArgs e)
@@ -208,6 +209,37 @@ namespace GUI
                         break;
                     }
                 Log.WriteLog("change " + (lsvBill.Tag as Table).Name + " to " + lkedPickTable.Text);
+            }
+        }
+
+        private void btnMergeTable_Click(object sender, EventArgs e)
+        {
+            int id1 = (lsvBill.Tag as Table).ID;
+            int id2;
+            if (lkedPickTable.EditValue == null)
+            {
+                XtraMessageBox.Show("Hãy chọn bàn cần gộp");
+                return;
+            }
+            else
+                id2 = (int)lkedPickTable.EditValue;
+
+            if (XtraMessageBox.Show(string.Format("Bạn có thật sự muốn gộp {0} sang {1}?",
+                (lsvBill.Tag as Table).Name, lkedPickTable.Text),
+                "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                TableBUS.Instance.MergeTable(id1, id2);
+                LoadTable();
+                LoadLookUpEditTable();
+                btnMergeTable.Enabled = false;
+
+                foreach (SimpleButton item in flpListTable.Controls)
+                    if ((item.Tag as Table).ID == id2)
+                    {
+                        lsvBill.Tag = item.Tag;
+                        break;
+                    }
+                Log.WriteLog("merge " + (lsvBill.Tag as Table).Name + " to " + lkedPickTable.Text);
             }
         }
 
