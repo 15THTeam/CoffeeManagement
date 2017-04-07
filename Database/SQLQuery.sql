@@ -127,18 +127,20 @@ insert into BillInfo (BillID, FoodID, Amount) values (2, 4, 2)
 GO
 
 -- Account's procedure
-create proc USP_Login
-@UserName nvarchar(100), @Password nvarchar(100)
-as
-begin
-	select * from Account where UserName = @UserName and Password = @Password
-end
-go
+CREATE PROC dbo.USP_Login
+@UserName NVARCHAR(100), @Password NVARCHAR(100)
+AS
+	SELECT *
+	FROM dbo.Account
+	WHERE UserName = @UserName AND Password = @Password
+GO
 
 CREATE PROC USP_GetAccountByUserName
 @UserName VARCHAR(100)
 AS
-	SELECT * FROM dbo.Account WHERE UserName = @UserName
+	SELECT *
+	FROM dbo.Account
+	WHERE UserName = @UserName
 GO
 
 CREATE PROC USP_GetAllAccount
@@ -277,7 +279,7 @@ GO
 -- end Bill's procedure
 
 -- Bill Info's procedure
-create proc USP_InsertBillInfo
+ALTER proc USP_InsertBillInfo
 @BillID int, @FoodID int, @Amount int
 as
 begin
@@ -292,14 +294,13 @@ begin
 	begin
 		declare @newAmount int = @foodAmount + @Amount
 		if (@newAmount > 0)
-			update BillInfo set Amount = @foodAmount + @Amount where FoodID = @FoodID
-		else
+			update BillInfo set Amount = @newAmount where FoodID = @FoodID
+		ELSE IF (@newAmount <= 0)
 			delete BillInfo where BillID = @BillID and FoodID = @FoodID
 	end
 	else
-	begin
-		insert into BillInfo (BillID, FoodID, Amount) values (@BillID, @FoodID, @Amount)
-	end
+		IF (@Amount > 0)
+			INSERT into BillInfo (BillID, FoodID, Amount) values (@BillID, @FoodID, @Amount)
 end
 GO
 
@@ -309,9 +310,8 @@ AS
 	DELETE dbo.BillInfo WHERE BillID = @BillID
 GO
 -- end Bill's procedure
-
 create trigger UTG_UpdateBillInfo
-on BillInfo for insert, update
+on BillInfo for insert
 as
 begin
 	declare @billID int
@@ -444,51 +444,33 @@ as begin
 end
 GO
 
-create proc USP_SwitchTable
-@TableID1 int, @TableID2 int
-as
-begin
-	declare @idFirstBill int
-	declare @idSecondBill int
+ALTER PROC USP_SwitchTable
+@TableID1 INT, @TableID2 INT
+AS
+BEGIN
+	DECLARE @isTable1Null INT = 0
+	DECLARE @isTable2Null INT = 0
+	SELECT @isTable1Null = ID FROM dbo.Bill WHERE TableID = @TableID1 AND Status = 0
+	SELECT @isTable2Null = ID FROM dbo.Bill WHERE TableID = @TableID2 AND Status = 0
 
-	declare @isFirstTableEmpty int = 1
-	declare @isSecondTableEmpty int = 1
-
-	select @idSecondBill = ID from Bill where TableID = @TableID2 and status = 0
-	select @idFirstBill = ID from Bill where TableID = @TableID1 and status = 0
-
-	if (@idFirstBill is null)
-	begin
-		insert into Bill(CheckIn, TableID, status)
-		values (GETDATE(), @TableID1, 0)
-
-		select @idFirstBill = MAX(ID) from Bill where TableID = @TableID1 and status = 0
-	end
-
-	select @isFirstTableEmpty = COUNT(*) from BillInfo where BillID = @idFirstBill
-
-	if (@idSecondBill is null)
-	begin
-		insert into Bill(CheckIn, TableID, status)
-		values (GETDATE(), @TableID2, 0)
-		select @idSecondBill = MAX(ID) from Bill where TableID = @TableID2 and status = 0
-	end
-
-	select @isSecondTableEmpty = COUNT(*) from BillInfo where BillID = @idSecondBill
-
-	select id into IDBillInfoTable from BillInfo where BillID = @idSecondBill
-
-	update BillInfo set BillID = @idSecondBill where BillID = @idFirstBill
-	update BillInfo set BillID = @idFirstBill where ID in (select * from IDBillInfoTable)
-
-	drop table IDBillInfoTable
-
-	if (@isFirstTableEmpty = 0)
-		update TableCoffee set Status = N'Trống' where ID = @TableID2
-
-	if (@isSecondTableEmpty = 0)
-		update TableCoffee set Status = N'Trống' where ID = @TableID1
-end
+	IF (@isTable1Null = 0 AND @isTable2Null > 0)
+		BEGIN
+			UPDATE dbo.Bill SET TableID = @TableID1 WHERE ID = @isTable2Null
+			UPDATE dbo.TableCoffee SET Status = N'Có người' WHERE ID = @TableID1
+			UPDATE dbo.TableCoffee SET Status = N'Trống' WHERE ID = @TableID2
+        END
+	ELSE IF (@isTable1Null > 0 AND @isTable2Null = 0)
+		BEGIN
+			UPDATE dbo.Bill SET TableID = @TableID2 WHERE Status = 0 AND ID = @isTable1Null
+			UPDATE dbo.TableCoffee SET Status = N'Có người' WHERE ID = @TableID2
+			UPDATE dbo.TableCoffee SET Status = N'Trống' WHERE ID = @TableID1
+        END
+    ELSE IF (@isTable1Null > 0 AND @isTable2Null > 0)
+		BEGIN
+			UPDATE dbo.Bill SET TableID = @TableID2 WHERE Status = 0 AND ID = @isTable1Null
+			UPDATE dbo.Bill SET TableID = @TableID1 WHERE Status = 0 AND ID = @isTable2Null
+        END
+END
 GO
 
 CREATE PROC USP_GetAllTable
