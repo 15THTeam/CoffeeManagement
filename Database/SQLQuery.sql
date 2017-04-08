@@ -444,7 +444,7 @@ as begin
 end
 GO
 
-ALTER PROC USP_SwitchTable
+CREATE PROC USP_SwitchTable
 @TableID1 INT, @TableID2 INT
 AS
 BEGIN
@@ -467,8 +467,8 @@ BEGIN
         END
     ELSE IF (@isTable1Null > 0 AND @isTable2Null > 0)
 		BEGIN
-			UPDATE dbo.Bill SET TableID = @TableID2 WHERE Status = 0 AND ID = @isTable1Null
-			UPDATE dbo.Bill SET TableID = @TableID1 WHERE Status = 0 AND ID = @isTable2Null
+			UPDATE dbo.Bill SET TableID = @TableID2 WHERE ID = @isTable1Null
+			UPDATE dbo.Bill SET TableID = @TableID1 WHERE ID = @isTable2Null
         END
 END
 GO
