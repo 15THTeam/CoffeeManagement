@@ -2,7 +2,6 @@ D:\C#\Coffee Management\CoffeeManagement\DTO\bin\Debug\DTO.dll
 D:\C#\Coffee Management\CoffeeManagement\DTO\bin\Debug\DTO.pdb
 D:\C#\Coffee Management\CoffeeManagement\DTO\obj\Debug\DTO.dll
 D:\C#\Coffee Management\CoffeeManagement\DTO\obj\Debug\DTO.pdb
-D:\C#\Coffee Management\CoffeeManagement\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache
 D:\CofeeManagement\DTO\bin\Debug\DTO.dll
 D:\CofeeManagement\DTO\bin\Debug\DTO.pdb
 D:\CofeeManagement\DTO\obj\Debug\DTO.csprojResolveAssemblyReference.cache

@@ -212,7 +212,11 @@ GO
 CREATE PROC USP_UpdateFood
 @ID INT, @Name NVARCHAR(100), @CategoryID INT, @Price INT
 AS
-	UPDATE dbo.Food SET Name = @Name, CategoryID = @CategoryID, Price = @Price WHERE ID = @ID
+	DECLARE @BillIDCount INT = 0
+	SELECT @BillIDCount = COUNT(*) FROM Bill AS b, BillInfo AS bi WHERE FoodID = @ID AND b.ID = bi.BillID AND b.Status = 0
+
+	IF (@BillIDCount = 0)
+		UPDATE dbo.Food SET Name = @Name, CategoryID = @CategoryID, Price = @Price WHERE ID = @ID
 GO
 
 CREATE PROC USP_DeleteFood

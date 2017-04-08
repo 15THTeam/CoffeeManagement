@@ -222,7 +222,7 @@ namespace GUI
                 catch (Exception ex)
                 {
                     SplashScreenManager.CloseForm();
-                    XtraMessageBox.Show("Sao lưu thất bại!\nError: " + ex.ToString(), "Lỗi");
+                    XtraMessageBox.Show("Sao lưu thất bại!\nError: " + ex, "Lỗi");
                 }
             }
         }
@@ -244,7 +244,7 @@ namespace GUI
                 catch (Exception ex)
                 {
                     SplashScreenManager.CloseForm();
-                    XtraMessageBox.Show("Phục hồi thất bại!\nError: " + ex.ToString(), "Lỗi");
+                    XtraMessageBox.Show("Phục hồi thất bại!\nError: " + ex, "Lỗi");
                 }
             }
         }

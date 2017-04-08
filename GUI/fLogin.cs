@@ -42,7 +42,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("Lỗi: " + ex.ToString());
+                XtraMessageBox.Show("Lỗi: " + ex);
             }
         }
 

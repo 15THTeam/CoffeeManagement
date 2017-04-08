@@ -42,7 +42,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("Error: " + ex.ToString());
+                XtraMessageBox.Show("Error: " + ex);
             }
         }
 
@@ -64,7 +64,7 @@ namespace GUI
                 }
                 catch (Exception ex)
                 {
-                    XtraMessageBox.Show("Error: " + ex.ToString());
+                    XtraMessageBox.Show("Error: " + ex);
                 }
 
                 if (BillBUS.Instance.DeleteBill(id))

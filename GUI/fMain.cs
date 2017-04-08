@@ -77,7 +77,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("Error: " + ex.ToString());
+                XtraMessageBox.Show("Error: " + ex);
             }
 
             int totalPrice = 0;
@@ -174,7 +174,7 @@ namespace GUI
                 }
                 catch (Exception ex)
                 {
-                    XtraMessageBox.Show("Eror: " + ex.ToString());
+                    XtraMessageBox.Show("Eror: " + ex);
                 }
             }
             ShowBill(table.ID);
@@ -257,7 +257,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("Error: " + ex.ToString());
+                XtraMessageBox.Show("Error: " + ex);
             }
 
             int discount = (int)spDiscount.Value;
@@ -276,7 +276,7 @@ namespace GUI
                     }
                     catch (Exception ex)
                     {
-                        XtraMessageBox.Show("Error: " + ex.ToString());
+                        XtraMessageBox.Show("Error: " + ex);
                     }
 
                     SplashScreenManager.ShowForm(typeof(WaitForm1));

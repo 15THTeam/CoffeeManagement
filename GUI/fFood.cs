@@ -37,7 +37,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("Error: " + ex.ToString());
+                XtraMessageBox.Show("Error: " + ex);
             }
 
             RepositoryItemLookUpEdit myLookup = new RepositoryItemLookUpEdit();
@@ -51,7 +51,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("Error: " + ex.ToString());
+                XtraMessageBox.Show("Error: " + ex);
             }
         }
 
@@ -144,10 +144,10 @@ namespace GUI
                 return;
             }
 
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
             Food food = new Food(int.Parse(id), name, int.Parse(categoryID), price);
             if (FoodBUS.Instance.UpdateFood(food))
             {
-                SplashScreenManager.ShowForm(typeof(WaitForm1));
                 LoadFoodToGridControl();
                 SplashScreenManager.CloseForm();
                 Log.WriteLog("update Food: Name: " + curFood.Name + " -> " + name
@@ -157,7 +157,7 @@ namespace GUI
             else
             {
                 SplashScreenManager.CloseForm();
-                XtraMessageBox.Show("Sửa thông tin món thất bại", "Lỗi");
+                XtraMessageBox.Show("Sửa thông tin món thất bại\n Không thể thay đổi thông tin món hiện hành", "Lỗi");
             }
         }
 
@@ -206,7 +206,7 @@ namespace GUI
             catch (Exception ex)
             {
                 SplashScreenManager.CloseForm();
-                XtraMessageBox.Show("Error: " + ex.ToString());
+                XtraMessageBox.Show("Error: " + ex);
             }
         }
 

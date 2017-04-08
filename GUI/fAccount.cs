@@ -41,7 +41,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("Error: " + ex.ToString());
+                XtraMessageBox.Show("Error: " + ex);
             }
 
             RepositoryItemLookUpEdit myLookup = new RepositoryItemLookUpEdit();
@@ -55,7 +55,7 @@ namespace GUI
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show("Error: " + ex.ToString());
+                XtraMessageBox.Show("Error: " + ex);
             }
         }
 
@@ -215,7 +215,7 @@ namespace GUI
             catch (Exception ex)
             {
                 SplashScreenManager.CloseForm();
-                XtraMessageBox.Show("Error: " + ex.ToString());
+                XtraMessageBox.Show("Error: " + ex);
             }
         }
 
