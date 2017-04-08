@@ -19,6 +19,7 @@ namespace GUI
         {
             InitializeComponent();
             currentClickButton = null;
+            btnMergeTable.Enabled = false;
             btnChangeTable.Enabled = false;
             SplashScreenManager.ShowForm(typeof(WaitForm1));
             LoadTable();
@@ -197,6 +198,7 @@ namespace GUI
                 (lsvBill.Tag as Table).Name, lkedPickTable.Text),
                 "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
+                Log.WriteLog("change " + (lsvBill.Tag as Table).Name + " to " + lkedPickTable.Text);
                 TableBUS.Instance.SwitchTable(id1, id2);
                 LoadTable();
                 LoadLookUpEditTable();
@@ -208,7 +210,6 @@ namespace GUI
                         lsvBill.Tag = item.Tag;
                         break;
                     }
-                Log.WriteLog("change " + (lsvBill.Tag as Table).Name + " to " + lkedPickTable.Text);
             }
         }
 
@@ -228,6 +229,7 @@ namespace GUI
                 (lsvBill.Tag as Table).Name, lkedPickTable.Text),
                 "Thông báo", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
+                Log.WriteLog("merge " + (lsvBill.Tag as Table).Name + " to " + lkedPickTable.Text);
                 TableBUS.Instance.MergeTable(id1, id2);
                 LoadTable();
                 LoadLookUpEditTable();
@@ -239,7 +241,6 @@ namespace GUI
                         lsvBill.Tag = item.Tag;
                         break;
                     }
-                Log.WriteLog("merge " + (lsvBill.Tag as Table).Name + " to " + lkedPickTable.Text);
             }
         }
 
